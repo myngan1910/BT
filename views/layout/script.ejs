@@ -1,0 +1,75 @@
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap.min1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+</script>
+<script src="/js/custom.js"></script>
+<script>
+    function toggleSearch() {
+        var searchInput = document.getElementById("search-input");
+        var searchIcon = document.getElementById("search-icon");
+
+      
+        if (searchInput.style.display === "none" || searchInput.style.display === "") {
+            searchInput.style.display = "block";
+            searchInput.style.width = "200px";
+            searchIcon.style.opacity = "0"; 
+        } else {
+            searchInput.style.display = "none";
+            searchInput.style.width = "0"; 
+            searchIcon.style.opacity = "1"; 
+        }
+    }
+    
+
+   function addcart(x) {
+    var product = x.parentElement.parentElement;
+    var Img = product.querySelector("img").src;
+    var name = product.querySelector("h5").innerText;
+    var price = product.querySelector("p b").nextSibling.textContent.trim();
+    var quantity = product.querySelector("#quantity-field").value;
+
+    if (quantity === '' || quantity <= 0) {
+        alert('Vui lòng nhập số lượng hợp lệ.');
+        return;
+    }
+
+    var item = [Img, name, price, quantity];
+    if (sessionStorage.getItem("giohang")) {
+        giohang = JSON.parse(sessionStorage.getItem("giohang"));
+    }
+
+    giohang.push(item);
+    sessionStorage.setItem("giohang", JSON.stringify(giohang));
+
+    // Gọi showgiohang() để cập nhật giỏ hàng ngay lập tức
+    showgiohang();
+}
+
+function showgiohang() {
+    giohang = JSON.parse(sessionStorage.getItem("giohang"));
+    var kq = '';
+    var quantityItem = 0;
+    if (giohang != null) {
+        for (var i = 0; i < giohang.length; i++) {
+            quantityItem += parseInt(giohang[i][3]);
+            kq += `
+            <div id="cart" class="row g-2 p-2 border-bottom">
+                <div class="col-4"><input type="checkbox" value=""><img class="rounded-2 bg-light p-2 col-12 w-75"
+                    src="${giohang[i][0]}" alt="avatar"></div>
+                <div class="col-8">
+                    <p id="name" class="heading-color fw-semibold mb-1">${giohang[i][1]}</p>
+                    <p id="price" class="heading-color fw-semibold mb-1">${giohang[i][2]}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <input type="number" id="quantity" name="quantity" min="1" max="100" value="${giohang[i][3]}">
+                        <a type="button" onclick="xoa(this)" class="btn btn-sm p-0 fs-4"> X </a>
+                    </div>
+                </div>
+            </div>`;
+        }
+    }
+    document.getElementById("cartItem").innerHTML = kq;
+    document.getElementById("quantityItem").innerHTML = quantityItem;
+}
+
+</script>
