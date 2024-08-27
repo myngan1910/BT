@@ -20,6 +20,6 @@ router.post('/login', loginRouter.postLogin);
 router.get('/register', loginRouter.getRegister);
 router.post('/Register', checkin.requireRegister,loginRouter.postRegister);
 
-router.post('/search', userController.getSearch)
+router.get('/search', userController.getSearch)
 
 module.exports = router;

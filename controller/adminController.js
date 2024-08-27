@@ -21,7 +21,7 @@ module.exports = {
     postcreUsers:  async(req,res) => {
         const name = req.body.name;
         const mail = req.body.mail;
-        const phone = parseInt(req.body.phone);
+        const phone = req.body.phone;
         const add = req.body.address;
         const rolee = parseInt(req.body.roleid);
         
@@ -33,9 +33,10 @@ module.exports = {
     detailUsers: async(req,res) => {
        
         const genId = parseInt(req.params.ID);
+        
         const detail=  await adminModel.detailUsers(genId)
         const dt= await adminModel.getRole();
-        return res.render("./users/usersDetail", {usersDetail: detail[0],datauserr:dt})
+        return res.render("./users/usersDetail", {usersDetail: detail,datauserr:dt})
        
     },
     deleUsers: async(req,res) => {
@@ -49,7 +50,7 @@ module.exports = {
         const genId = parseInt(req.params.ID);
         const name = req.body.name;
         const mail = req.body.mail;
-        const phone = parseInt(req.body.phone);
+        const phone = req.body.phone;
         const add = req.body.address;
         const rolee = parseInt(req.body.roleid);
         const view =  await adminModel.postUsers(genId,name,mail,phone,add,rolee)
@@ -79,7 +80,7 @@ detailRole: async(req,res) => {
    
     const genId = parseInt(req.params.ID);
     const data=  await adminModel.detailRole(genId)
-    return res.render("./role/roleDetail", {roleDetail: data[0]})
+    return res.render("./role/roleDetail", {roleDetail: data})
    
 },
 deleRole: async(req,res) => {
@@ -121,7 +122,7 @@ viewRole: async(req,res) => {
        
         const genId = parseInt(req.params.ID);
         const detail=  await adminModel.detailHome(genId)
-        return res.render("./home/homeDetail", {homeDetail: detail[0]})
+        return res.render("./home/homeDetail", {homeDetail: detail})
        
     },
     deleHome: async(req,res) => {
@@ -166,7 +167,7 @@ viewRole: async(req,res) => {
     detailShop: async(req,res) => {
         const genId = parseInt(req.params.ID);
         const data =  await adminModel.detailShop(genId)
-        return res.render("./shop/shopDetail", {shopDetail: data[0]})
+        return res.render("./shop/shopDetail", {shopDetail: data})
     },
     deleShop: async(req,res) => {
         const genId = parseInt(req.params.ID);
@@ -207,7 +208,7 @@ viewRole: async(req,res) => {
     detailReason: async(req,res) => {
         const genId = parseInt(req.params.ID);
         const data =  await adminModel.detailReason(genId)
-        return res.render("./reason/reasonDetail", {reasonDetail: data[0]})
+        return res.render("./reason/reasonDetail", {reasonDetail: data})
     },
     deleReason: async(req,res) => {
         const genId = parseInt(req.params.ID);
@@ -245,7 +246,7 @@ viewRole: async(req,res) => {
     detailTest: async(req,res) => {
         const genId = parseInt(req.params.ID);
         const data =  await adminModel.detailTest(genId)
-        return res.render("./test/testDetail", {testDetail: data[0]})
+        return res.render("./test/testDetail", {testDetail: data})
     },
     deleTest: async(req,res) => {
         const genId = parseInt(req.params.ID);
@@ -285,7 +286,7 @@ viewRole: async(req,res) => {
     detailCtc: async(req,res) => {
         const genId = parseInt(req.params.ID);
         const detailCtc =  await adminModel.detailCtc(genId)
-        return res.render("./contact/ctcDetail", {ctcDetail: detailCtc[0]})
+        return res.render("./contact/ctcDetail", {ctcDetail: detailCtc})
     },
     deleCtc: async(req,res) => {
         const genId = parseInt(req.params.ID);
@@ -326,7 +327,7 @@ viewRole: async(req,res) => {
     detailSocial: async(req,res) => {
         const genId = parseInt(req.params.ID);
         const data =  await adminModel.detailSocial(genId)
-        return res.render("./social/socialDetail", {socialDetail: data[0]})
+        return res.render("./social/socialDetail", {socialDetail: data})
     },
     deleSocial: async(req,res) => {
         const genId = parseInt(req.params.ID);

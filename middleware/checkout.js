@@ -15,8 +15,8 @@ module.exports = {
     Login: async(req,res, next ) => {
         const id = req.session.userId;
         const data = await login.postLogin(id);
-        
-        if(data[0].position !=  "Admin" ) {
+        console.log(data.role)
+        if(data.role.position !=  "Admin" ) {
            res.redirect('/')
         } else {
          next()

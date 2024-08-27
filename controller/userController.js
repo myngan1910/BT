@@ -5,7 +5,13 @@ const userModel = require('../model/adminModel.js')
 module.exports = {
     getUser: async (req,res) => {
         const id = parseInt(req.session.userId)
-        const user = await userModel.getUser(id);
+        if(id >= 0 ){
+            var user = await userModel.getUser(id);
+        } else {
+            var user ={}
+        }
+       
+
        
         const users = await userModel.getUsers();
         const home = await userModel.getHome();
@@ -19,7 +25,12 @@ module.exports = {
     },
     getShop: async(req,res) => {
         const id = parseInt(req.session.userId)
-        const user = await userModel.getUser(id);
+        
+        if(id >= 0 ){
+            var user = await userModel.getUser(id);
+        } else {
+            var user ={}
+        }
         const users = await userModel.getUsers();
         const shop = await userModel.getShop();
         const so = await userModel.getSocial();
@@ -30,7 +41,11 @@ module.exports = {
     getProduct: async(req,res) => {
         const id = parseInt(req.session.userId)
         const idp = parseInt(req.params.ID)
-        const user = await userModel.getUser(id);
+        if(id >= 0 ){
+            var user = await userModel.getUser(id);
+        } else {
+            var user ={}
+        }
         const users = await userModel.getUsers();
         const shop = await userModel.getproduct(idp);
         const so = await userModel.getSocial();
@@ -39,7 +54,11 @@ module.exports = {
     },
     getWhy: async(req,res) => {
         const id = parseInt(req.session.userId)
-        const user = await userModel.getUser(id);
+        if(id >= 0 ){
+            var user = await userModel.getUser(id);
+        } else {
+            var user ={}
+        }
         const users = await userModel.getUsers();
         const reason = await userModel.getReason();
         const so = await userModel.getSocial();
@@ -48,7 +67,11 @@ module.exports = {
     },
     getTest: async(req,res) => {
         const id = parseInt(req.session.userId)
-        const user = await userModel.getUser(id);
+        if(id >= 0 ){
+            var user = await userModel.getUser(id);
+        } else {
+            var user ={}
+        }
         const users = await userModel.getUsers();
         const test = await userModel.getTest();
         const so = await userModel.getSocial();
@@ -58,16 +81,24 @@ module.exports = {
    
     getContact: async(req,res) => {
         const id = parseInt(req.session.userId)
-        const user = await userModel.getUser(id);
+        if(id >= 0 ){
+            var user = await userModel.getUser(id);
+        } else {
+            var user ={}
+        }
         const users = await userModel.getUsers();
         const so = await userModel.getSocial();
         res.render('contact',{k1:'', k2:'', k3:'', k4:'', k5: 'active',user:user,users:users,social:so})
 
     },
     getSearch: async(req,res) => {
-        const search = req.body.search;
+        const search = req.query.search;
         const id = parseInt(req.session.userId)
-        const user = await userModel.getUser(id);
+        if(id >= 0 ){
+            var user = await userModel.getUser(id);
+        } else {
+            var user ={}
+        }
         const users = await userModel.getUsers();
         const shop = await userModel.getShop();
         const so = await userModel.getSocial();
